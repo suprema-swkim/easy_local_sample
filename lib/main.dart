@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 // 2.언어별 데이터 정합성
 // 3.키값 일괄 변경
 // 4.변경 데이터 바로 반영
-// 5.
+// 5.테스트 용이(context 없이 사용)
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
