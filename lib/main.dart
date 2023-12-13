@@ -10,6 +10,14 @@ import 'package:flutter/material.dart';
 // LocaleKeys 생성(locle key 최신화) - ko 파일 기준
 // flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
 
+// -h , 도움말
+// -S , 현지화 폴더(resources/langs)
+// -s , 현지화 파일(First file)
+// -O , 생성 파일 위치(lib/generated)
+// -o , 파일 이름(codegen_loader.g.dart)
+// -f , 파일 포맷(json)
+// -u , 중첩 키 무시(false)
+
 // 1.키 중복 확인가능
 // 2.언어별 데이터 정합성
 // 3.키값 일괄 변경
@@ -28,9 +36,15 @@ void main() async {
         Locale('en', 'US'),
         Locale('ko', 'KR'),
       ],
-      path: 'assets/translations', // <-- 기본은 해당 데이터
-      assetLoader: const CodegenLoader(), // 추가 되어있으면 기준이 여기
+
+      /// 현지화 폴더 경로
+      path: 'assets/translations', // <-- 무시
+      /// 현지화 파일
+      assetLoader: const CodegenLoader(), // <-- 대체
+      /// 시작 언어
       // startLocale: const Locale('en', 'US'),
+      /// 예외시 언어
+      // fallbackLocale: const Locale('en', 'US'),
       child: const MyApp(),
     ),
   );
@@ -102,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+// 이후
 enum CardFormatType {
   /// Mifare CSN 타입
   csn('CSN', LocaleKeys.csn),
@@ -115,4 +130,28 @@ enum CardFormatType {
   String get title => _title.tr();
 
   const CardFormatType(this.value, this._title);
+}
+
+// 이전
+enum CardFormatType2 {
+  /// Mifare CSN 타입
+  csn('CSN'),
+
+  /// Wiegand 타입
+  wiegand('WIEGAND');
+
+  final String value;
+
+  String get title {
+    switch (this) {
+      case CardFormatType2.csn:
+        // return LocaleAssist().of.csnCardType;
+        return '';
+      case CardFormatType2.wiegand:
+        // return LocaleAssist().of.wiegandCardType;
+        return '';
+    }
+  }
+
+  const CardFormatType2(this.value);
 }

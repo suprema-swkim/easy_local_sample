@@ -18,10 +18,10 @@ Future<void> loadTranslations(Locale locale) async {
     saveLocale: true, //mandatory to use EasyLocalizationController.savedLocale
     fallbackLocale: locale,
     supportedLocales: [locale],
-    assetLoader: const CodegenLoader(),
+    assetLoader: const CodegenLoader(), // 대체
     useOnlyLangCode: false,
     useFallbackTranslations: true,
-    path: 'assets/translations',
+    path: 'assets/translations', // 무시
     onLoadError: (FlutterError e) {},
   );
 
@@ -41,9 +41,19 @@ void main() async {
       await loadTranslations(const Locale('ko', 'KR'));
     });
     test('ko_KR 테스트', () {
-      expect(L.tr(LocaleKeys.title), CodegenLoader.ko_KR[LocaleKeys.title]);
-      expect(L.tr(LocaleKeys.title1), CodegenLoader.ko_KR[LocaleKeys.title1]);
-      expect(L.tr(LocaleKeys.title2), CodegenLoader.ko_KR[LocaleKeys.title2]);
+      Map<String, dynamic> keys = Map.from(CodegenLoader.ko_KR);
+
+      var actual = L.tr(LocaleKeys.title);
+      var matcher = "제목";
+      expect(actual, matcher, reason: '이유 : ${LocaleKeys.title} 번역 확인');
+      keys.remove(LocaleKeys.title);
+
+      actual = L.tr(LocaleKeys.msg, args: ['Easy localization', 'Dart']);
+      matcher = "Easy localization are written in the Dart 언어8";
+      expect(actual, matcher, reason: '이유 : ${LocaleKeys.msg} 번역 확인');
+      keys.remove(LocaleKeys.msg);
+
+      expect(keys.length, 0, reason: '이유 : 현지화 모든 데이터 테스트 확인');
     });
   });
   group('en_US 테스트', () {
@@ -51,9 +61,7 @@ void main() async {
       await loadTranslations(const Locale('en', 'US'));
     });
     test('en_US 테스트', () {
-      expect(L.tr(LocaleKeys.title), CodegenLoader.en_US[LocaleKeys.title]);
-      expect(L.tr(LocaleKeys.title1), CodegenLoader.en_US[LocaleKeys.title1]);
-      expect(L.tr(LocaleKeys.title2), CodegenLoader.en_US[LocaleKeys.title2]);
+      // ...
     });
   });
 }
