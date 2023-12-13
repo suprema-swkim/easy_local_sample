@@ -1,0 +1,26 @@
+{
+    "title": "title1",
+    "title1": "title2",
+    "title2": "title3",
+    "title3": "title4",
+    "csn": "csn type",
+    "wiegand": "wiegand type",
+    "msg": "{} are written in the {} language",
+    "msg_named": "Easy localization is written in the {lang} language",
+    "msg_mixed": "{} are written in the {lang} language",
+    "gender": {
+        "male": "Hi man ;) {}",
+        "female": "Hello girl :) {}",
+        "other": "Hello {}"
+    },
+    "gender123": {
+        "male": "Hi man ;) {}",
+        "female": "Hello girl :) {}",
+        "other": "Hello {}"
+    },
+    "example": {
+        "hello": "Hello",
+        "world": "World",
+        "helloWorld": "@:example.hello @:example.world"
+    }
+}

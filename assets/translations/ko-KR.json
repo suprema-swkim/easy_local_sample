@@ -1,0 +1,26 @@
+{
+    "title": "제목",
+    "title1": "제목11",
+    "title2": "제목22",
+    "title3": "제목33",
+    "csn": "csn 타입",
+    "wiegand": "wiegand 타입",
+    "msg": "{} are written in the {} 언어",
+    "msg_named": "Easy localization is written in the {lang} 언어",
+    "msg_mixed": "{} are written in the {lang} 언어",
+    "gender": {
+        "male": "Hi man ;) {}",
+        "female": "Hello girl :) {}",
+        "other": "Hello {}"
+    },
+    "gender123": {
+        "male": "Hi man ;) {}",
+        "female": "Hello girl :) {}",
+        "other": "Hello {}"
+    },
+    "example": {
+        "hello": "안녕",
+        "world": "하세요",
+        "helloWorld": "@:example.hello @:example.world"
+    }
+}
