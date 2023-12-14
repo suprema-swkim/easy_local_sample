@@ -10,8 +10,9 @@ abstract class  LocaleKeys {
   static const msg = 'msg';
   static const msg_named = 'msg_named';
   static const msg_mixed = 'msg_mixed';
-  static const gender = 'gender';
-  static const gender123 = 'gender123';
+  static const type_aType = 'type.aType';
+  static const type_bType = 'type.bType';
+  static const type = 'type';
   static const example_hello = 'example.hello';
   static const example_world = 'example.world';
   static const example_helloWorld = 'example.helloWorld';

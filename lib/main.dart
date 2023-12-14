@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 // CodegenLoader 생성(locle 최신화)
 // flutter pub run easy_localization:generate -S assets/translations
 
-// LocaleKeys 생성(locle key 최신화) - ko 파일 기준
+// LocaleKeys 생성(locle key 최신화) - 파일 하나 기준(현재 ko-KR)
 // flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
 
 // -h , 도움말
@@ -24,16 +24,34 @@ import 'package:flutter/material.dart';
 // 4.변경 데이터 바로 반영
 // 5.테스트 용이(context 없이 사용)
 
+// Locale File -> {languageCode}-{countryCode}.json
+// Locale -> {languageCode}_{countryCode}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
+  // 분실된 키 메시지만 표시
   EasyLocalization.logger.enableLevels = [LevelMessages.error, LevelMessages.warning];
+
+  // 커스텀 로거
+  // EasyLogPrinter customLogPrinter = (
+  //   Object object, {
+  //   String name,
+  //   StackTrace stackTrace,
+  //   LevelMessages level,
+  // }) {
+  //   ///Your function
+  //   print('$name: ${object.toString()}');
+  // };
+
+  // /// override printer to custom
+  // EasyLocalization.logger.printer = customLogPrinter;
 
   runApp(
     EasyLocalization(
       supportedLocales: const [
-        Locale('en', 'US'),
+        Locale('en', 'US'), // en_US(미국식), en_GB(영국식)
         Locale('ko', 'KR'),
       ],
 
@@ -64,6 +82,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// tr
+//
+// args - {} 를 치환
+// namedArgs - {key} 를 치환
+// gender - key 안에 key를 고를때 사용
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
@@ -72,14 +95,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,21 +109,40 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(LocaleKeys.title3),
             const Text('msg').tr(args: ['Easy localization', 'Dart']),
             const Text('msg_mixed').tr(args: ['Easy localization'], namedArgs: {'lang': 'ABCD'}),
-            const Text('gender').tr(gender: 'male', args: ['나난']),
-            const Text('gender').tr(gender: 'female', args: ['마마']),
+            const Text('type').tr(gender: 'aType', args: ['333']),
+            const Text('type').tr(gender: 'bType', args: ['555']),
+            const Text('type').tr(gender: 'other', args: ['777']),
             Text('example.helloWorld'.tr()),
             const Divider(),
             Text(CardFormatType.csn.title),
             const Divider(),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          // 현지화 설정
+          context.setLocale(const Locale('en', 'US'));
+
+          // 현재 현지와 가져오기
+          // print(context.locale.toString());
+
+          // 장치 현지와 가져오기
+          // print(context.deviceLocale.toString())
+
+          // 장치 현지와 삭제
+          // print(context.deleteSaveLocale());
+
+          // 지원 현지화 가져오기
+          // print(context.supportedLocales);
+
+          // 기본 현지화 가져오기
+          // print(context.fallbackLocale);
+
+          // 현지화 변환 - Locale('en', 'US')
+          // print('en'.toLocale());
+          // print('en_US'.toLocale());
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -116,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-// 이후
+// 수정 후
 enum CardFormatType {
   /// Mifare CSN 타입
   csn('CSN', LocaleKeys.csn),
@@ -132,7 +166,7 @@ enum CardFormatType {
   const CardFormatType(this.value, this._title);
 }
 
-// 이전
+// 수정 전
 enum CardFormatType2 {
   /// Mifare CSN 타입
   csn('CSN'),

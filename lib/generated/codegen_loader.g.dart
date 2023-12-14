@@ -24,15 +24,10 @@ class CodegenLoader extends AssetLoader{
   "msg": "{} are written in the {} 언어",
   "msg_named": "Easy localization is written in the {lang} 언어",
   "msg_mixed": "{} are written in the {lang} 언어",
-  "gender": {
-    "male": "Hi man ;) {}",
-    "female": "Hello girl :) {}",
-    "other": "Hello {}"
-  },
-  "gender123": {
-    "male": "Hi man ;) {}",
-    "female": "Hello girl :) {}",
-    "other": "Hello {}"
+  "type": {
+    "aType": "안녕 man ;) {}",
+    "bType": "안녕 girl :) {}",
+    "other": "안녕 {}"
   },
   "example": {
     "hello": "안녕",
@@ -50,14 +45,9 @@ static const Map<String,dynamic> en_US = {
   "msg": "{} are written in the {} language",
   "msg_named": "Easy localization is written in the {lang} language",
   "msg_mixed": "{} are written in the {lang} language",
-  "gender": {
-    "male": "Hi man ;) {}",
-    "female": "Hello girl :) {}",
-    "other": "Hello {}"
-  },
-  "gender123": {
-    "male": "Hi man ;) {}",
-    "female": "Hello girl :) {}",
+  "type": {
+    "aType": "Hi man ;) {}",
+    "bType": "Hello girl :) {}",
     "other": "Hello {}"
   },
   "example": {
