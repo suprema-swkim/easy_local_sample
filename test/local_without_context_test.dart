@@ -37,31 +37,57 @@ void main() async {
   SharedPreferences.setMockInitialValues({});
 
   group('ko_KR 테스트', () {
+    Map<String, dynamic> mapLocale = Map.from(CodegenLoader.ko_KR);
+
     setUpAll(() async {
       await loadTranslations(const Locale('ko', 'KR'));
     });
-    test('ko_KR 테스트', () {
-      Map<String, dynamic> keys = Map.from(CodegenLoader.ko_KR);
 
+    test('LocaleKeys.title 테스트', () {
       var actual = L.tr(LocaleKeys.title);
       var matcher = "제목";
       expect(actual, matcher, reason: '이유 : ${LocaleKeys.title} 번역 확인');
-      keys.remove(LocaleKeys.title);
+      mapLocale.remove(LocaleKeys.title);
+    });
 
-      actual = L.tr(LocaleKeys.msg, args: ['Easy localization', 'Dart']);
-      matcher = "Easy localization are written in the Dart 언어";
+    test('LocaleKeys.msg 테스트', () {
+      var actual = L.tr(LocaleKeys.msg, args: ['Easy localization', 'Dart']);
+      var matcher = "Easy localization are written in the Dart 언어";
       expect(actual, matcher, reason: '이유 : ${LocaleKeys.msg} 번역 확인');
-      keys.remove(LocaleKeys.msg);
+      mapLocale.remove(LocaleKeys.msg);
+    });
 
-      // expect(keys.length, 0, reason: '이유 : 현지화 모든 데이터 테스트 확인');
+    // ...
+
+    test('LocaleKeys.msg 테스트', () {
+      expect(mapLocale.keys, {}, reason: '이유 : 현지화 모든 데이터 테스트 확인');
     });
   });
   group('en_US 테스트', () {
+    Map<String, dynamic> mapLocale = Map.from(CodegenLoader.en_US);
+
     setUpAll(() async {
       await loadTranslations(const Locale('en', 'US'));
     });
-    test('en_US 테스트', () {
-      // ...
+
+    test('LocaleKeys.title 테스트', () {
+      var actual = L.tr(LocaleKeys.title);
+      var matcher = "title";
+      expect(actual, matcher, reason: '이유 : ${LocaleKeys.title} 번역 확인');
+      mapLocale.remove(LocaleKeys.title);
+    });
+
+    test('LocaleKeys.msg 테스트', () {
+      var actual = L.tr(LocaleKeys.msg, args: ['Easy localization', 'Dart']);
+      var matcher = "Easy localization are written in the Dart language";
+      expect(actual, matcher, reason: '이유 : ${LocaleKeys.msg} 번역 확인');
+      mapLocale.remove(LocaleKeys.msg);
+    });
+
+    // ...
+
+    test('LocaleKeys.msg 테스트', () {
+      expect(mapLocale.keys, {}, reason: '이유 : 현지화 모든 데이터 테스트 확인');
     });
   });
 }
