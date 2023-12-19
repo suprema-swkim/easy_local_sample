@@ -40,6 +40,8 @@ dependencies:
     sdk: flutter
   easy_logger: ^0.0.2
   shared_preferences: ^2.2.2
+  easy_localization_loader: ^2.0.1
+  json_pretty: ^1.0.4
 
 dev_dependencies:
   flutter_test:

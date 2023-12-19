@@ -1,14 +1,19 @@
 import 'package:easy_local_sample/generated/codegen_loader.g.dart';
 import 'package:easy_local_sample/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:easy_logger/easy_logger.dart';
 import 'package:flutter/material.dart';
 
-// CodegenLoader 생성(locle 최신화)
+// ------------------------------------------------
+
+// CodegenLoader 생성(locle 최신화) - .json & .key 만 호환
 // flutter pub run easy_localization:generate -S assets/translations
 
 // LocaleKeys 생성(locle key 최신화) - 파일 하나 기준(현재 ko-KR)
 // flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart -S assets/translations
+
+// ------------------------------------------------
 
 // -h , 도움말
 // -S , 현지화 폴더(resources/langs)
@@ -18,11 +23,15 @@ import 'package:flutter/material.dart';
 // -f , 파일 포맷(json)
 // -u , 중첩 키 무시(false)
 
+// ------------------------------------------------
+
 // 1.키 중복 확인가능
 // 2.언어별 데이터 정합성
 // 3.키값 일괄 변경
 // 4.변경 데이터 바로 반영
 // 5.테스트 용이(context 없이 사용)
+
+// ------------------------------------------------
 
 // Locale File -> {languageCode}-{countryCode}.json
 // Locale -> {languageCode}_{countryCode}
@@ -55,13 +64,17 @@ void main() async {
         Locale('ko', 'KR'),
       ],
 
-      /// 현지화 폴더 경로
-      path: 'assets/translations', // <-- 무시
-      /// 현지화 파일
-      assetLoader: const CodegenLoader(), // <-- 대체
+      /// csv
+      // path: 'assets/translations/langs.csv',
+      // assetLoader: CsvAssetLoader(),
+
+      /// json
+      path: 'assets/translations',
+      assetLoader: const CodegenLoader(),
+
       /// 시작 언어
       // startLocale: const Locale('en', 'US'),
-      /// 예외시 언어
+      /// 예외처리 언어
       // fallbackLocale: const Locale('en', 'US'),
       child: const MyApp(),
     ),
