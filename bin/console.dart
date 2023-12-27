@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:json_pretty/json_pretty.dart';
 
 // dart console.dart
+// dart run :console
 
 void main() async {
   final csvFile = File('assets/translations/langs.csv');
